@@ -53,7 +53,19 @@ def selectSource():
             continue
 
 
-def central(pics, wm, filepath):
+def selectOut():
+    while True:
+        outpath = input("Please enter path to the output folder >>> ")
+        if os.path.exists(outpath):
+            return outpath + '/'
+        elif outpath == 'x':
+            quit()
+        else:
+            print('Error: invalid path')
+            continue
+
+
+def central(pics, wm, filepath, outpath):
     for n in pics:
         im = Image.open(filepath + n)
         imWidth, imHeight = im.size
@@ -61,11 +73,11 @@ def central(pics, wm, filepath):
         wmHeight = (int(wm.size[1] * (wmWidth / wm.size[0])))
         wmres = wm.resize((wmWidth, wmHeight))
         im.paste(wmres, (int(imWidth / 2) - int(wmWidth / 2), int(imHeight / 2) - int(wmHeight / 2)), wmres)
-        newname = os.path.splitext(filepath + n)[0] + '_wm' + os.path.splitext(filepath + n)[1]
+        newname = os.path.splitext(outpath + n)[0] + '_wm' + os.path.splitext(filepath + n)[1]
         im.save(newname)
 
 
-def tile(pics, wm, filepath):
+def tile(pics, wm, filepath, outpath):
     wmrot = wm.rotate(45, expand=True)
     for n in pics:
         im = Image.open(filepath + n)
@@ -76,7 +88,7 @@ def tile(pics, wm, filepath):
         for w in range(0, imWidth, wmWidth):
             for h in range(0, imHeight, wmHeight):
                 im.paste(wmres, (w, h), wmres)
-        newname = os.path.splitext(filepath + n)[0] + '_wm' + os.path.splitext(filepath + n)[1]
+        newname = os.path.splitext(outpath + n)[0] + '_wm' + os.path.splitext(filepath + n)[1]
         im.save(newname)
 
 
@@ -84,11 +96,12 @@ if __name__ == "__main__":
     print('Welcome to the Watermark Script! Follow the instructions or press x to exit.')
     wmark = selectWm()
     pictures, path = selectSource()
+    output = selectOut()
     mode = input("Select watermark mode: central or tile >>> ")
     if mode == 'central':
-        central(pictures, wmark, path)
+        central(pictures, wmark, path, output)
     elif mode == 'tile':
-        tile(pictures, wmark, path)
+        tile(pictures, wmark, path, output)
     elif mode == 'x':
         quit()
     else:
