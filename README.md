@@ -12,8 +12,6 @@ Features:
 - image with watermark is saved with the same extension and modified filename
 
 
-TODO:
-
-[] add option to select output folder for images with watermark;
-
-[] add option to run the script with arguments;
+##### TODO:
+- [ ] add option to select output folder for images with watermark;
+- [ ] add option to run the script with arguments;
