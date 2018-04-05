@@ -15,6 +15,7 @@ Features:
 
 Call examples:
 > python Watermark.py -s C:\User\images\ -w C:\User\images\watermark.png -o C:\User\images\result\ -t
+
 > python Watermark.py -s images\test.jpg -w watermark.png -o .\ -c
 
 All arguments are optional and script can be called without them. In this case, user will be prompted to enter necessary info by steps.
